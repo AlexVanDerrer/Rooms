@@ -1,9 +1,6 @@
 
 import HomePage from '../pages/home.vue';
-import AboutPage from '../pages/about.vue';
-import FormPage from '../pages/form.vue';
-import CatalogPage from '../pages/catalog.vue';
-import ProductPage from '../pages/product.vue';
+import RoomsPage from '../pages/rooms.vue';
 import SettingsPage from '../pages/settings.vue';
 
 import DynamicRoutePage from '../pages/dynamic-route.vue';
@@ -15,21 +12,10 @@ const routes = [
     path: '/',
     component: HomePage,
   },
+
   {
-    path: '/about/',
-    component: AboutPage,
-  },
-  {
-    path: '/form/',
-    component: FormPage,
-  },
-  {
-    path: '/catalog/',
-    component: CatalogPage,
-  },
-  {
-    path: '/product/:id/',
-    component: ProductPage,
+    path: '/rooms/',
+    component: RoomsPage,
   },
   {
     path: '/settings/',

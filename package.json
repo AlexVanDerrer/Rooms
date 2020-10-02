@@ -2,6 +2,7 @@
   "name": "privatechat",
   "private": true,
   "version": "1.0.0",
+  "author": "Alex VanDerrer",
   "description": "PrivateChat",
   "repository": "",
   "license": "UNLICENSED",
@@ -23,12 +24,15 @@
     "Samsung >= 5"
   ],
   "dependencies": {
+    "axios": "^0.20.0",
     "dom7": "^2.1.5",
     "framework7": "^5.7.12",
     "framework7-icons": "^3.0.1",
     "framework7-vue": "^5.7.12",
     "template7": "^1.4.2",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-websocket": "^0.2.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
