@@ -21,9 +21,9 @@ import App from '../components/app.vue';
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
 
-import VueWebsocket from "vue-websocket";
+// import VueWebsocket from "vue-websocket";
 
-// Vue.use(VueWebsocket, "ws://localhost:3000");
+// Vue.use(VueWebsocket, "wss://localhost:3000");
 
 import { createStore } from '../store/index.js';
 
