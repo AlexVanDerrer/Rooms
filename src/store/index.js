@@ -1,35 +1,32 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 
 Vue.use(Vuex);
 
-export function createStore() {
-    return new Vuex.Store({
-        state: function () {
-            return { 
-                test: 'test123',
-                messageList: [
-                    {
-                        id: 1,
-                        text: 'Hello'
-                    },
-                    {
-                        id: 2,
-                        text: 'Hi'
-                    },
-                ]
-            } 
-            
+export const store = new Vuex.Store({
+    state: { 
+        user: {},
+        allMessages: [],
+        users: []
+    },
+    mutations: {
+        setUser(state, user) {
+            state.user = user
+            console.log('setuser', state.user);
         },
-        getters: {
-            getItems: state => {
-                return state.test
-            },
-            getMessageList: state => {
-                return state.messageList
-            }
+        clearData(state){
+            state.user = {};
+            state.allMessages = [];
+            state.users = []
         },
+        SOCKET_newMessage(state, data){
+            state.allMessages.push(data);
+        },
+        SOCKET_updateUsers(state, users){
+            state.users = users
+        }
+    },
 
-    });
-}
+});
+
+

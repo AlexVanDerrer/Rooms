@@ -13,26 +13,26 @@ export default {
     return {
         // Framework7 Parameters
         f7params: {
-        id: 'io.framework7.myapp', // App bundle ID
-        name: 'PrivateChat', // App name
-        theme: 'auto', // Automatic theme detection
+            id: 'io.framework7.myapp', // App bundle ID
+            name: 'PrivateChat', // App name
+            theme: 'auto', // Automatic theme detection
 
-        // App root data
-        data: function () {
-            return {}
-        },
-        // App routes
-        routes: routes,
-        // Input settings
-        input: {
-            scrollIntoViewOnFocus: Device.cordova && !Device.electron,
-            scrollIntoViewCentered: Device.cordova && !Device.electron,
-        },
-        // Cordova Statusbar settings
-        statusbar: {
-            iosOverlaysWebView: true,
-            androidOverlaysWebView: false,
-        },
+            // App root data
+            data: function () {
+                return {}
+            },
+            // App routes
+            routes: routes,
+            // Input settings
+            input: {
+                scrollIntoViewOnFocus: Device.cordova && !Device.electron,
+                scrollIntoViewCentered: Device.cordova && !Device.electron,
+            },
+            // Cordova Statusbar settings
+            statusbar: {
+                iosOverlaysWebView: true,
+                androidOverlaysWebView: false,
+            },
         },
     }
     },

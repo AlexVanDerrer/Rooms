@@ -31,7 +31,7 @@
     "framework7-vue": "^5.7.12",
     "template7": "^1.4.2",
     "vue": "^2.6.12",
-    "vue-websocket": "^0.2.3",
+    "vue-socket.io": "^3.0.10",
     "vuex": "^3.5.1"
   },
   "devDependencies": {

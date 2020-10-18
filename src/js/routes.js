@@ -1,8 +1,8 @@
 
 import HomePage from '../pages/home.vue';
-import RoomsPage from '../pages/rooms.vue';
 import SettingsPage from '../pages/settings.vue';
-import ChatRoom from '../pages/chat_room.vue'
+
+
 import DynamicRoutePage from '../pages/dynamic-route.vue';
 import RequestAndLoad from '../pages/request-and-load.vue';
 import NotFoundPage from '../pages/404.vue';
@@ -12,19 +12,11 @@ const routes = [
     path: '/',
     component: HomePage,
   },
-
-  {
-    path: '/rooms/',
-    component: RoomsPage,
-  },
   {
     path: '/settings/',
     component: SettingsPage,
   },
-  {
-    path: '/chatroom/',
-    component: ChatRoom,
-  },
+
 
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',

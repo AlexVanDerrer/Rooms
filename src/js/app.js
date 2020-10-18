@@ -21,16 +21,24 @@ import App from '../components/app.vue';
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
 
-// import VueWebsocket from "vue-websocket";
+import VueSocketIO from 'vue-socket.io'
 
-// Vue.use(VueWebsocket, "wss://localhost:3000");
+import { store } from '../store/index.js';
 
-import { createStore } from '../store/index.js';
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://192.168.0.15:3000', // http://localhost:3000
+  vuex: {
+      store: store,
+      actionPrefix: 'SOCKET_',
+      mutationPrefix: 'SOCKET_'
+  },
+}))
 
 // Init App
-new Vue({
+new Vue({ 
   el: '#app',
-  store: createStore(),
+  store: store,
   render: (h) => h(App),
 
   // Register App Component
