@@ -1,6 +1,5 @@
 // Import Vue
 import Vue from 'vue';
-import Vuex from 'vuex';
 
 // Import Framework7
 import Framework7 from 'framework7/framework7-lite.esm.bundle.js';
@@ -27,7 +26,7 @@ import { store } from '../store/index.js';
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://192.168.0.15:3000', // http://localhost:3000
+  connection: 'http://91.122.105.99', // http://localhost:3000 http://192.168.0.15:3000
   vuex: {
       store: store,
       actionPrefix: 'SOCKET_',

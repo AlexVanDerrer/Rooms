@@ -7,7 +7,7 @@
                     <span class="subtitle" style="color: gray; font-size: 12px;">server: <span :style='"color:"+ serverStatus.color'>{{ serverStatus.text }}</span></span>
                 </f7-nav-title>
                 <f7-nav-right>
-                    <f7-link icon-ios="f7:gear" icon-aurora="f7:gear" icon-md="material:settings" href="/settings/"></f7-link>
+                    <f7-link icon-ios="f7:info" icon-aurora="f7:help_outline" icon-md="material:help_outline" href="/about/"></f7-link>
                 </f7-nav-right>
 
             </f7-navbar>
@@ -45,7 +45,6 @@
                     <f7-col> </f7-col>
                     <f7-col>
                         <f7-button outline @click="submit()">Login</f7-button>
-                        
                     </f7-col>
                     <f7-col></f7-col>
                 </f7-row>
@@ -59,19 +58,12 @@
                     
                 </f7-nav-left>
                 <f7-nav-title>rooms: {{ user.room }}
-                    <span class="subtitle" style="color: gray; font-size: 12px;">status: </span>
+                     <span class="subtitle" style="color: gray; font-size: 12px;">status: <span :style='"color:"+ serverStatus.color'>{{ serverStatus.text }}</span></span>
                 </f7-nav-title>
                 <f7-nav-right>
                     <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="right"></f7-link>
                 </f7-nav-right>
             </f7-navbar>
-            
-            <!-- <f7-block>
-                <ul>
-                    <li v-for="m in allMessages" :key="m.id">{{ m.name+' '+m.text }}</li>
-                    
-                </ul>
-            </f7-block> -->
 
             <chat :allMessages="allMessages"/>
 
@@ -82,10 +74,17 @@
                             <f7-list simple-list>
                                 <f7-list-item v-for="u in users" :key="u.id" :title="u.name"></f7-list-item>
                             </f7-list>
+                            <f7-list simple-list>
+                                <f7-list-item>
+                                    <span>close the room</span>
+                                    <f7-toggle checked></f7-toggle>
+                                </f7-list-item>
+                            </f7-list>
                     </f7-page>
                 </f7-view>
             </f7-panel>
         </template>
+
     </f7-page>
 </template>
 <script>
@@ -104,7 +103,7 @@ export default {
         auth: false,
         name: "",
         room: "",
-        serverStatus: { text: 'Connecting...', color: 'gray'}, 
+        serverStatus: { text: 'Connecting...', color: 'yellow'}, 
     }),
     computed: {
         ...mapState(['user', 'allMessages', 'users']),
