@@ -19,7 +19,7 @@
         v-for="(message, index) in messageData"
         :key="index"
         :type="message.type"
-        :avatar="loc+'../static/'+message.avatar+'.png'"
+        :avatar="message.avatar"
         :first="isFirstMessage(message, index)"
         :last="isLastMessage(message, index)"
         :tail="isTailMessage(message, index)"
@@ -51,7 +51,6 @@ export default {
             typingMessage: null,
             messagesData: this.allMessages,
             responseInProgress: false,
-            loc: window.location,
         };
     },
     computed: {

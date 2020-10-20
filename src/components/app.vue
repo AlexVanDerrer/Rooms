@@ -14,7 +14,7 @@ export default {
         // Framework7 Parameters
         f7params: {
             id: 'io.framework7.myapp', // App bundle ID
-            name: 'PrivateChat', // App name
+            name: 'Rooms:', // App name
             theme: 'auto', // Automatic theme detection
 
             // App root data

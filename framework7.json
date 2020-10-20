@@ -1,9 +1,9 @@
 {
-  "cwd": "E:\\Project\\PrivateChat",
+  "cwd": "E:\\Project\\rooms",
   "type": [
     "cordova"
   ],
-  "name": "PrivateChat",
+  "name": "Rooms:",
   "framework": "vue",
   "template": "tabs",
   "bundler": "webpack",

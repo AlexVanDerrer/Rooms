@@ -1,9 +1,9 @@
 {
   "name": "rooms",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.6",
   "author": "Alex VanDerrer",
-  "description": "Private Chat",
+  "description": "Rooms:",
   "repository": "",
   "license": "UNLICENSED",
   "scripts": {
