@@ -70,14 +70,14 @@
             <f7-panel right resizable theme-dark>
                 <f7-view>
                     <f7-page>
-                        <f7-block-title>Users in the room</f7-block-title>
-                            <f7-list simple-list>
-                                <f7-list-item v-for="u in users" :key="u.id" :title="u.name"></f7-list-item>
-                            </f7-list>
-                            <f7-list simple-list>
-                                <f7-list-item>
-                                    <span>close the room</span>
-                                    <f7-toggle checked></f7-toggle>
+                        <f7-block-title>Users in the room {{ users.length }}</f7-block-title>
+                            <f7-list>
+                                <f7-list-item v-for="u in users" :key="u.id" :title="u.name">
+                                    <template >
+                                        <f7-icon v-if="u.isAdmin" slot="media" size="32" ios="f7:house" aurora="f7:house" md="material:stars"></f7-icon>
+                                        <f7-toggle v-if="user.id == u.id && u.isAdmin" slot="after" @change="closeRoom()"></f7-toggle>
+                                    </template>
+
                                 </f7-list-item>
                             </f7-list>
                     </f7-page>
@@ -112,6 +112,8 @@ export default {
         ...mapMutations(['setUser', 'clearData']),
         submit(){
             console.log('submit');
+            console.log(this.users.length);
+
             const user = {
                 name: this.name,
                 room: this.room
@@ -136,6 +138,9 @@ export default {
             })
 
         },
+        closeRoom(){
+            console.log('close room');
+        }
     },
     components: {
         chat: Chat

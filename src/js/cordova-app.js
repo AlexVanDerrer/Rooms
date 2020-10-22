@@ -3,13 +3,13 @@ var cordovaApp = {
   /*
   This method hides splashscreen after 2 seconds
   */
-  handleSplashscreen: function() {
-    var f7 = cordovaApp.f7;
-    if (!window.navigator.splashscreen || f7.device.electron) return;
-    setTimeout(() => {
-      window.navigator.splashscreen.hide();
-    }, 4000);
-  },
+  // handleSplashscreen: function() {
+  //   var f7 = cordovaApp.f7;
+  //   if (!window.navigator.splashscreen || f7.device.electron) return;
+  //   setTimeout(() => {
+  //     window.navigator.splashscreen.hide();
+  //   }, 1000);
+  // },
   /*
   This method prevents back button tap to exit from app on android.
   In case there is an opened modal it will close that modal instead.

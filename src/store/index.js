@@ -23,7 +23,8 @@ export const store = new Vuex.Store({
             state.allMessages.push(data);
         },
         SOCKET_updateUsersList(state, users){
-            state.users = users
+            state.users = users,
+            console.log('updateUser', state.user);
         }
     },
 
