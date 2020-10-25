@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import crypto from './Crypto.js'
 
 Vue.use(Vuex);
 
@@ -20,7 +21,7 @@ export const store = new Vuex.Store({
             state.users = []
         },
         SOCKET_newMessage(state, data){
-            state.allMessages.push(data);
+            state.allMessages.push(crypto.decryptData(data));
         },
         SOCKET_updateUsersList(state, users){
             state.users = users,
