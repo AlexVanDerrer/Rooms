@@ -26,7 +26,7 @@
     >
         <span slot="name">{{ message.name}}</span>
 
-        <span slot="text" v-if="message.name == 'AdminBot'"><span style="color: red">{{ message.text }}</span></span>
+        <span slot="text" v-if="message.name == 'AdminBot'"><span style="color: red">{{message.text }}</span></span>
         <span slot="text" v-else-if="message.text && message.name">{{ message.text }}</span>
 
 
@@ -37,6 +37,7 @@
 </template>
 <script>
 import fulldate from 'moment';
+import CryptoJS from 'crypto-js'
 
 export default {
     props: {
@@ -54,15 +55,15 @@ export default {
         };
     },
     computed: {
-    messageData(){
-        const self = this;
-        return self.allMessages;
-    },
-    date() {
-        let date = fulldate();
-        date.lang('en');
-        return date.format('dddd, MMMM DD YYYY, HH:mm')
-    }
+        messageData(){
+            const self = this;
+            return self.allMessages;
+        },
+        date() {
+            let date = fulldate();
+            date.lang('en');
+            return date.format('dddd, MMMM DD YYYY, HH:mm')
+        }
     },
     mounted() {
     const self = this;

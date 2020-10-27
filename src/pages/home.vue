@@ -89,7 +89,8 @@
 </template>
 <script>
 import { mapMutations, mapState } from 'vuex';
-import Chat from '../components/chat'
+import Chat from '../components/chat';
+
 export default {
     sockets: {
         connect() {
