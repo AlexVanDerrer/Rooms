@@ -24,15 +24,17 @@ export const store = new Vuex.Store({
         SOCKET_newMessage(state, data){
             let message = data;
             // console.log('message.text', message.text);
-            let cipher  = CryptoJS.AES.decrypt(message.text, CryptoJS.MD5('rooms-security').toString());
-            message.text = cipher.toString(CryptoJS.enc.Utf8);
+            let cipherName  = CryptoJS.AES.decrypt(message.name, CryptoJS.MD5('rooms-security').toString());
+            let cipherText  = CryptoJS.AES.decrypt(message.text, CryptoJS.MD5('rooms-security').toString());
+            message.name = cipherName.toString(CryptoJS.enc.Utf8);
+            message.text = cipherText.toString(CryptoJS.enc.Utf8);
             // console.log('decrypt text', message.text);
             state.allMessages.push(message);
 
         },
         SOCKET_updateUsersList(state, users){
             state.users = users,
-            console.log('updateUser', state.user);
+            console.log('updateUser', state.users);
         }
     },
 

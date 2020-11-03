@@ -12,8 +12,9 @@
         @click="sendMessage"
     ></f7-link>
     </f7-messagebar>
-
+    
     <f7-messages ref="messages">
+    <f7-messages-title>	&#128274; The room is protected by end-to-end encryption. <br>No one but you and your interlocutors can read them.</f7-messages-title>
     <f7-messages-title><b>{{ date }}</b></f7-messages-title>
     <f7-message
         v-for="(message, index) in messageData"
@@ -26,7 +27,7 @@
     >
         <span slot="name">{{ message.name}}</span>
 
-        <span slot="text" v-if="message.name == 'AdminBot'"><span style="color: red">{{message.text }}</span></span>
+        <span slot="text" v-if="message.name == 'AdminBot'"><span style="color: yellow">{{message.text }}</span></span>
         <span slot="text" v-else-if="message.text && message.name">{{ message.text }}</span>
 
 
@@ -66,85 +67,59 @@ export default {
         }
     },
     mounted() {
-    const self = this;
-    self.$f7ready(() => {
-        self.messagebar = self.$refs.messagebar.f7Messagebar;
-        self.messages = self.$refs.messages.f7Messages;
-    });
+        const self = this;
+        self.$f7ready(() => {
+            self.messagebar = self.$refs.messagebar.f7Messagebar;
+            self.messages = self.$refs.messages.f7Messages;
+        });
     },
     methods: {
-    isFirstMessage(message, index) {
-        const self = this;
-        const previousMessage = self.messagesData[index - 1];
-        if (message.isTitle) return false;
-        if (!previousMessage || previousMessage.type !== message.type || previousMessage.name !== message.name) return true;
-        return false;
-    },
-    isLastMessage(message, index) {
-        const self = this;
-        const nextMessage = self.messagesData[index + 1];
-        if (message.isTitle) return false;
-        if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
-        return false;
-    },
-    isTailMessage(message, index) {
-        const self = this;
-        const nextMessage = self.messagesData[index + 1];
-        if (message.isTitle) return false;
-        if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
-        return false;
-    },
-    sendMessage() {
-        const self = this;
-        const text = self.messagebar.getValue().replace(/\n/g, '<br>').trim();
-        const messagesToSend = [];
+        isFirstMessage(message, index) {
+            const self = this;
+            const previousMessage = self.messagesData[index - 1];
+            if (message.isTitle) return false;
+            if (!previousMessage || previousMessage.type !== message.type || previousMessage.name !== message.name) return true;
+            return false;
+        },
+        isLastMessage(message, index) {
+            const self = this;
+            const nextMessage = self.messagesData[index + 1];
+            if (message.isTitle) return false;
+            if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
+            return false;
+        },
+        isTailMessage(message, index) {
+            const self = this;
+            const nextMessage = self.messagesData[index + 1];
+            if (message.isTitle) return false;
+            if (!nextMessage || nextMessage.type !== message.type || nextMessage.name !== message.name) return true;
+            return false;
+        },
+        sendMessage() {
+            const self = this;
+            const text = self.messagebar.getValue().trim();
+            const messageToSend = {};
 
-        if (text.trim().length) {
-        messagesToSend.push({
-            text,
-            id: self.$store.state.user.id
-        });
-        }
-        if (messagesToSend.length === 0) {
-        return;
-        }
-
-        self.messagebar.clear();
-
-        if (text.length) self.messagebar.focus();
-        // Send message
-        // self.messagesData.push(...messagesToSend);
-
-        console.log(messagesToSend);
-
-        self.$socket.emit('createMessage', messagesToSend[0], data => {
-            if(typeof data === "string"){
-                console.error(data);
+            if (text.length && text != '') {
+                self.messagebar.focus();
+                messageToSend.id = self.$store.state.user.id;
+                messageToSend.text = text;
+            } else {
+                return;
             }
-        } )
+            self.messagebar.clear();
+            
+            // Send message
+            messageToSend.text = CryptoJS.AES.encrypt(messageToSend.text, CryptoJS.MD5('rooms-security').toString()).toString();
+            // console.log('messageToSend', messageToSend);
+            self.$socket.emit('createMessage', messageToSend, data => {
+                if(typeof data === "string"){
+                    console.error(data);
+                }
+            })
 
-        // Mock response
-        if (self.responseInProgress) return;
-        self.responseInProgress = true;
-        // setTimeout(() => {
-        //   const answer = self.answers[Math.floor(Math.random() * self.answers.length)];
-        //   const person = self.people[Math.floor(Math.random() * self.people.length)];
-        //   self.typingMessage = {
-        //     name: person.name,
-        //     avatar: person.avatar,
-        //   };
-        //   setTimeout(() => {
-        //     self.messagesData.push({
-        //       text: answer,
-        //       type: 'received',
-        //       name: person.name,
-        //       avatar: person.avatar,
-        //     });
-        //     self.typingMessage = null;
-        //     self.responseInProgress = false;
-        //   }, 4000);
-        // }, 1000);
-    },
+
+        },
     },
 };
 </script>
