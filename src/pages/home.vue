@@ -44,7 +44,7 @@
                 <f7-row>
                     <f7-col> </f7-col>
                     <f7-col>
-                        <f7-button outline @click="submit()">Login</f7-button>
+                        <f7-button outline @click="submit()"><div v-show="preloader" class="preloader" style="width: 25px; height: 25px; margin-right: 20px"></div>Login</f7-button>
                     </f7-col>
                     <f7-col></f7-col>
                 </f7-row>
@@ -88,6 +88,7 @@
     </f7-page>
 </template>
 <script>
+import CryptoJS from 'crypto-js'
 import { mapMutations, mapState } from 'vuex';
 import Chat from '../components/chat';
 
@@ -104,7 +105,8 @@ export default {
         auth: false,
         name: "",
         room: "",
-        serverStatus: { text: 'Connecting...', color: 'yellow'}, 
+        serverStatus: { text: 'Connecting...', color: 'yellow'},
+        preloader: false 
     }),
     computed: {
         ...mapState(['user', 'allMessages', 'users']),
@@ -112,8 +114,8 @@ export default {
     methods: {
         ...mapMutations(['setUser', 'clearData']),
         submit(){
-            console.log('submit');
-            console.log(this.users.length);
+            // console.log('submit');
+            // console.log(this.users.length);
 
             const user = {
                 name: this.name,
@@ -125,10 +127,16 @@ export default {
                     // выводить всплывающее сообщение
                     console.log(data);
                 } else {
-                    console.log('submit ok');
+                    // console.log('submit ok');
                     user.id = data.userId
+                    user.roomName = this.room;
                     this.setUser(user);
-                    this.auth = true
+                    this.preloader = true
+                    setTimeout(() => {
+                        this.preloader = false
+                        this.auth = true
+                    }, 1000);
+                    
                 }
             })
         },

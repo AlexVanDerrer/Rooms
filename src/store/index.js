@@ -22,19 +22,20 @@ export const store = new Vuex.Store({
             state.users = []
         },
         SOCKET_newMessage(state, data){
-            let message = data;
-            // console.log('message.text', message.text);
-            let cipherName  = CryptoJS.AES.decrypt(message.name, CryptoJS.MD5('rooms-security').toString());
-            let cipherText  = CryptoJS.AES.decrypt(message.text, CryptoJS.MD5('rooms-security').toString());
-            message.name = cipherName.toString(CryptoJS.enc.Utf8);
-            message.text = cipherText.toString(CryptoJS.enc.Utf8);
-            // console.log('decrypt text', message.text);
-            state.allMessages.push(message);
-
+            if (data.name == 'AdminBot'){
+                state.allMessages.push(data);
+            } else {
+                let cipherName  = CryptoJS.AES.decrypt(data.name, state.user.room);
+                let cipherText  = CryptoJS.AES.decrypt(data.text, state.user.room);
+                data.name = cipherName.toString(CryptoJS.enc.Utf8);
+                data.text = cipherText.toString(CryptoJS.enc.Utf8);
+                state.allMessages.push(data);
+            }
         },
         SOCKET_updateUsersList(state, users){
-            state.users = users,
-            console.log('updateUser', state.users);
+            state.users = [];
+            state.users = users;
+            // console.log('updateUser', state.users);
         }
     },
 

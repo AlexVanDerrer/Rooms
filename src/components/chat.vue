@@ -14,7 +14,7 @@
     </f7-messagebar>
     
     <f7-messages ref="messages">
-    <f7-messages-title>	&#128274; The room is protected by end-to-end encryption. <br>No one but you and your interlocutors can read them.</f7-messages-title>
+    <f7-messages-title>	&#128274; The room is protected by end-to-end encryption. <br>All text and names are transmitted in encrypted form. <br>No one but you and your interlocutors can read them.</f7-messages-title>
     <f7-messages-title><b>{{ date }}</b></f7-messages-title>
     <f7-message
         v-for="(message, index) in messageData"
@@ -110,7 +110,7 @@ export default {
             self.messagebar.clear();
             
             // Send message
-            messageToSend.text = CryptoJS.AES.encrypt(messageToSend.text, CryptoJS.MD5('rooms-security').toString()).toString();
+            messageToSend.text = CryptoJS.AES.encrypt(messageToSend.text, self.$store.state.user.room).toString();
             // console.log('messageToSend', messageToSend);
             self.$socket.emit('createMessage', messageToSend, data => {
                 if(typeof data === "string"){
